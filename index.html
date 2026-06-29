@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Servimantos · Expertos en impermeabilización de techos con mantos asfálticos y acabados de alta calidad. Protección garantizada contra filtraciones." />
+  <meta name="theme-color" content="#0E2A47" />
+  <title>Servimantosmv · Impermeabilización & Acabados</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== Barra de progreso de scroll ===== -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#inicio" class="brand" aria-label="Servimantos inicio">
+        <img src="assets/img/logo.svg" alt="Servimantos" class="brand-logo" style="height:56px;width:auto" />
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#servicios">Servicios</a>
+        <a href="#mantos">Mantos</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto" class="nav-cta">Cotiza gratis</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="inicio">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="blob blob-orange"></div>
+        <div class="blob blob-blue"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="badge">
+            <span class="dot"></span> Impermeabilización profesional · +14 años
+          </span>
+          <h1>
+            Protegemos tu techo<br>
+            con <span class="grad-text">mantos que duran</span>.
+          </h1>
+          <p class="lead">
+            En Servimantosmv sellamos filtraciones de raíz e instalamos
+            acabados elegantes que resisten sol, lluvia y el paso del tiempo.
+            Trabajo limpio, garantía real y materiales premium.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contacto" class="btn btn-primary">
+              Solicitar inspección
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#mantos" class="btn btn-ghost">Ver modelos de mantos</a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="avatars" aria-hidden="true">
+              <span>JC</span><span>RM</span><span>LD</span><span>+</span>
+            </div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <small>+200 techos sellados y sin filtraciones</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" data-delay="120">
+          <div class="hero-card glass tilt">
+            <div class="hero-card-img"></div>
+            <div class="hero-card-body">
+              <div class="hcb-row">
+                <span class="hcb-tag">Garantía</span>
+                <strong>Hasta 5 años</strong>
+              </div>
+              <div class="hcb-bar"><span style="width:92%"></span></div>
+              <small>Cobertura total contra filtraciones</small>
+            </div>
+          </div>
+
+          <div class="float-chip chip-1 glass">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3s7 4 7 9a7 7 0 1 1-14 0c0-5 7-9 7-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            100% impermeable
+          </div>
+          <div class="float-chip chip-2 glass">
+            <svg viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4 10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Instalación rapida
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>Mantos asfálticos APP</span><span>•</span>
+          <span>Mantos SBS elastoméricos</span><span>•</span>
+          <span>Acabado mineral & aluminio</span><span>•</span>
+          <span>Sellado de azoteas</span><span>•</span>
+          <span>Impermeabilización líquida</span><span>•</span>
+          <span>Mantos asfálticos APP</span><span>•</span>
+          <span>Mantos SBS elastoméricos</span><span>•</span>
+          <span>Acabado mineral & aluminio</span><span>•</span>
+          <span>Sellado de azoteas</span><span>•</span>
+          <span>Impermeabilización líquida</span><span>•</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Stats ===== -->
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat reveal">
+          <strong class="count" data-target="200" data-suffix="+">0</strong>
+          <span>Techos impermeabilizados</span>
+        </div>
+        <div class="stat reveal" data-delay="80">
+          <strong class="count" data-target="14" data-suffix=" años">0</strong>
+          <span>De experiencia</span>
+        </div>
+        <div class="stat reveal" data-delay="160">
+          <strong class="count" data-target="150" data-suffix="%">0</strong>
+          <span>Clientes satisfechos</span>
+        </div>
+        <div class="stat reveal" data-delay="240">
+          <strong class="count" data-target="5" data-suffix=" años">0</strong>
+          <span>De garantía</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Servicios ===== -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Lo que hacemos</span>
+          <h2>Servicios pensados para que <span class="grad-text">no entre ni una gota</span></h2>
+          <p>Soluciones completas de impermeabilización y acabados, ejecutadas por un equipo certificado y con materiales de primera.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 13.5 12 4l9 9.5M5 12v8h14v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Impermeabilización de techos</h3>
+            <p>Instalación de mantos asfálticos en azoteas, terrazas y losas. Sellado térmico que elimina goteras y humedad.</p>
+            <ul class="card-list">
+              <li>Diagnóstico de filtraciones</li>
+              <li>Aplicación con soplete o autoadhesivo</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="80">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 20V8l6-4 6 4v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-5h4v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Acabados & remodelación</h3>
+            <p>Pañetes, frisos, pintura impermeable y acabados decorativos que dejan tu obra impecable y protegida.</p>
+            <ul class="card-list">
+              <li>Pintura elastomérica</li>
+              <li>Acabados antihumedad</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="160">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M6 6l2 2m8 8 2 2m0-12-2 2M8 16l-2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.8"/></svg>
+            </div>
+            <h3>Mantenimiento preventivo</h3>
+            <p>Revisiones programadas, resellado de juntas y limpieza de drenajes para extender la vida útil de tu impermeabilización.</p>
+            <ul class="card-list">
+              <li>Planes anuales</li>
+              <li>Reporte fotográfico</li>
+            </ul>
+          </article>
+
+          <article class="card reveal" data-delay="240">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 21c-2 0-3.5-1.6-3.5-3.6 0-2.6 3.5-6.4 3.5-6.4s3.5 3.8 3.5 6.4C10.5 19.4 9 21 7 21Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 4h6v6M20 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Impermeabilización líquida</h3>
+            <p>Membranas líquidas y poliuretano para domos, canales y superficies irregulares donde el manto no llega.</p>
+            <ul class="card-list">
+              <li>Sin juntas ni traslapos</li>
+              <li>Ideal para detalles</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Mantos / Modelos ===== -->
+    <section class="section section-alt" id="mantos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Nuestros mantos</span>
+          <h2>Modelos de <span class="grad-text">mantos asfálticos</span> para cada techo</h2>
+          <p>Elegimos el manto ideal según tu clima, pendiente y presupuesto. Estos son los que más instalamos.</p>
+        </div>
+
+        <div class="manto-grid">
+          <article class="manto-card reveal">
+            <div class="manto-top finish-mineral">
+              <span class="manto-price">Más popular</span>
+            </div>
+            <div class="manto-body">
+              <h3>Manto mineral granular</h3>
+              <p>Acabado con gravilla mineral que protege del sol y se ve perfecto a la vista. El favorito para azoteas transitables.</p>
+              <ul class="spec">
+                <li><span>Espesor</span><strong>4 mm</strong></li>
+                <li><span>Protección UV</span><strong>Alta</strong></li>
+                <li><span>Acabado</span><strong>Mineral rojo / gris</strong></li>
+              </ul>
+              <a href="#contacto" class="manto-link">Cotizar este manto →</a>
+            </div>
+          </article>
+
+          <article class="manto-card reveal" data-delay="80">
+            <div class="manto-top finish-foil">
+              <span class="manto-price">Anti-calor</span>
+            </div>
+            <div class="manto-body">
+              <h3>Manto foil aluminio</h3>
+              <p>Recubrimiento de aluminio que refleja el calor y baja la temperatura interior. Ideal para climas calientes.</p>
+              <ul class="spec">
+                <li><span>Espesor</span><strong>3 mm</strong></li>
+                <li><span>Reflectividad</span><strong>Muy alta</strong></li>
+                <li><span>Acabado</span><strong>Aluminio</strong></li>
+              </ul>
+              <a href="#contacto" class="manto-link">Cotizar este manto →</a>
+            </div>
+          </article>
+
+          <article class="manto-card reveal" data-delay="160">
+            <div class="manto-top finish-sbs">
+              <span class="manto-price">Alta gama</span>
+            </div>
+            <div class="manto-body">
+              <h3>Manto SBS elastomérico</h3>
+              <p>Caucho elastomérico que se estira y recupera con los movimientos de la losa. Máxima durabilidad y flexibilidad.</p>
+              <ul class="spec">
+                <li><span>Espesor</span><strong>4–5 mm</strong></li>
+                <li><span>Flexibilidad</span><strong>Extrema (-15°C)</strong></li>
+                <li><span>Acabado</span><strong>Liso / mineral</strong></li>
+              </ul>
+              <a href="#contacto" class="manto-link">Cotizar este manto →</a>
+            </div>
+          </article>
+
+          <article class="manto-card reveal" data-delay="240">
+            <div class="manto-top finish-app">
+              <span class="manto-price">Económico</span>
+            </div>
+            <div class="manto-body">
+              <h3>Manto APP polímero</h3>
+              <p>Plastómero resistente al calor y rayos UV, excelente relación precio-rendimiento para techos planos.</p>
+              <ul class="spec">
+                <li><span>Espesor</span><strong>3–4 mm</strong></li>
+                <li><span>Resistencia UV</span><strong>Alta</strong></li>
+                <li><span>Acabado</span><strong>Liso / arena</strong></li>
+              </ul>
+              <a href="#contacto" class="manto-link">Cotizar este manto →</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="manto-note reveal">
+          ¿No sabes cuál elegir? Te asesoramos sin costo según tu techo.
+          <a href="#contacto">Agenda una inspección gratuita →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Proceso ===== -->
+    <section class="section" id="proceso">
+      <div class="container proceso-wrap">
+        <div class="section-head reveal align-left">
+          <span class="eyebrow">Cómo trabajamos</span>
+          <h2>Un proceso <span class="grad-text">limpio y sin sorpresas</span></h2>
+          <p>Desde la primera visita hasta la garantía firmada, sabes exactamente qué esperar.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Inspección y diagnóstico</h3>
+            <p>Visitamos tu techo, detectamos filtraciones y medimos el área real a impermeabilizar.</p>
+          </div>
+          <div class="step reveal" data-delay="80">
+            <span class="step-num">02</span>
+            <h3>Propuesta y manto ideal</h3>
+            <p>Te entregamos una cotización clara con el modelo de manto recomendado y los tiempos.</p>
+          </div>
+          <div class="step reveal" data-delay="160">
+            <span class="step-num">03</span>
+            <h3>Preparación de superficie</h3>
+            <p>Limpieza, imprimante asfáltico y reparación de grietas para una adherencia perfecta.</p>
+          </div>
+          <div class="step reveal" data-delay="240">
+            <span class="step-num">04</span>
+            <h3>Instalación y garantía</h3>
+            <p>Aplicamos el manto, probamos con agua y firmamos tu garantía por escrito.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ¿Por qué? / Proyectos ===== -->
+    <section class="section section-alt" id="proyectos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Por qué Servimantos</span>
+          <h2>Trabajo que <span class="grad-text">habla por sí solo</span></h2>
+          <p>Resultados que protegen tu inversión y se ven bien.</p>
+        </div>
+
+        <div class="gallery">
+          <figure class="g-item g-tall reveal">
+            <div class="g-img g-1">
+              <svg class="g-art" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13.5 12 4l9 9.5M5 12v8h14v-8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20v-5h6v5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </div>
+            <figcaption><strong>Azotea residencial</strong><span>Manto mineral granular</span></figcaption>
+          </figure>
+          <figure class="g-item reveal" data-delay="80">
+            <div class="g-img g-2">
+              <svg class="g-art" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 21V8l8-4 8 4v13" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 21v-4h3v4M13 21v-4h3v4M8 12h3M13 12h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <figcaption><strong>Terraza comercial</strong><span>Acabado foil aluminio</span></figcaption>
+          </figure>
+          <figure class="g-item reveal" data-delay="160">
+            <div class="g-img g-3">
+              <svg class="g-art" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="m3 13 9 5 9-5M3 17l9 5 9-5" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </div>
+            <figcaption><strong>Sellado de juntas</strong><span>Membrana SBS elastomérica</span></figcaption>
+          </figure>
+          <figure class="g-item g-wide reveal" data-delay="120">
+            <div class="g-img g-4">
+              <svg class="g-art" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3s7 4 7 9a7 7 0 1 1-14 0c0-5 7-9 7-9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 13c1 1.2 2 1.2 3 0s2-1.2 3 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <figcaption><strong>Losa industrial</strong><span>Impermeabilización total garantizada</span></figcaption>
+          </figure>
+        </div>
+
+        <div class="why-grid">
+          <div class="why reveal">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 4.5 3.4 7.8 8 9 4.6-1.2 8-4.5 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h4>Garantía por escrito</h4>
+            <p>Hasta 10 años de cobertura real contra filtraciones.</p>
+          </div>
+          <div class="why reveal" data-delay="80">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h4>Cumplimos tiempos</h4>
+            <p>Te decimos cuándo empezamos y cuándo terminamos. Y lo cumplimos.</p>
+          </div>
+          <div class="why reveal" data-delay="160">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 12h18M3 17h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <h4>Materiales premium</h4>
+            <p>Solo marcas certificadas, nada de mantos genéricos que fallan.</p>
+          </div>
+          <div class="why reveal" data-delay="240">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.3-7-10a7 7 0 0 1 14 0c0 5.7-7 10-7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <h4>Equipo local</h4>
+            <p>Personal propio y capacitado, no subcontratamos a desconocidos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Testimonios ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Clientes felices</span>
+          <h2>Lo que dicen quienes <span class="grad-text">ya no tienen goteras</span></h2>
+        </div>
+        <div class="testimonials">
+          <blockquote class="testi reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Llevábamos años con humedad en el cuarto. Pusieron el manto mineral y en invierno no entró ni una gota. Impecables.”</p>
+            <footer><strong>María C.</strong><span>Casa · Zona norte</span></footer>
+          </blockquote>
+          <blockquote class="testi reveal" data-delay="80">
+            <div class="stars">★★★★★</div>
+            <p>“Profesionales de principio a fin. Cotización clara, llegaron puntual y dejaron todo limpio. La garantía me dio mucha tranquilidad.”</p>
+            <footer><strong>Ricardo M.</strong><span>Local comercial</span></footer>
+          </blockquote>
+          <blockquote class="testi reveal" data-delay="160">
+            <div class="stars">★★★★★</div>
+            <p>“Recomendados al 100%. Me asesoraron con el foil de aluminio y la casa se siente más fresca. Excelente acabado.”</p>
+            <footer><strong>Laura D.</strong><span>Vivienda familiar</span></footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA / Contacto ===== -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="cta-bg" aria-hidden="true"></div>
+          <div class="cta-grid">
+            <div class="cta-copy">
+              <span class="eyebrow light">Cotización sin costo</span>
+              <h2>Cuéntanos de tu techo y te respondemos hoy mismo</h2>
+              <p>Déjanos tus datos y un asesor te contacta para agendar la inspección gratuita.</p>
+
+              <ul class="cta-contact">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a1 1 0 0 1-1 1A15 15 0 0 1 3 6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                  <a href="tel:+10000000000">+57 (300) 437-2848</a>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <a href="mailto:hola@servimantos.com">servimanto10@gmail.com</a>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.3-7-10a7 7 0 0 1 14 0c0 5.7-7 10-7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4" stroke="currentColor" stroke-width="1.7"/></svg>
+                  <span>Servicio a domicilio en la ciudad de Barraquilla y Santa Marta</span>
+                </li>
+              </ul>
+            </div>
+
+            <form class="cta-form glass" id="contactForm" novalidate>
+              <div class="field">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="field">
+                <label for="telefono">Teléfono / WhatsApp</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Tu número" required />
+              </div>
+              <div class="field">
+                <label for="servicio">¿Qué necesitas?</label>
+                <select id="servicio" name="servicio">
+                  <option>Impermeabilización de techo</option>
+                  <option>Reparación de goteras</option>
+                  <option>Acabados / pintura impermeable</option>
+                  <option>Mantenimiento</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mensaje">Cuéntanos un poco</label>
+                <textarea id="mensaje" name="mensaje" rows="3" placeholder="Ej: tengo filtraciones en la azotea de unos 60 m²"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                Solicitar cotización gratis
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="form-msg" id="formMsg" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#inicio" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 13.5 12 4l9 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 12v7.5h14V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-text">Servi<strong>mantos</strong></span>
+        </a>
+        <p>Impermeabilización de techos con mantos asfálticos y acabados de alta calidad. Protegemos tu hogar, tú vives tranquilo.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="#servicios">Impermeabilización</a>
+        <a href="#servicios">Acabados</a>
+        <a href="#servicios">Mantenimiento</a>
+        <a href="#mantos">Mantos asfálticos</a>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="#proceso">Cómo trabajamos</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="tel:+10000000000">+57 (300) 437-2848</a>
+        <a href="mailto:hola@servimantos.com">servimanto10@gmail.com </a>
+        <a href="#contacto">Cotización gratuita</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Servimantosmv. Todos los derechos reservados.</span>
+      <span>Hecho con cuidado para que no entre ni una gota 💧</span>
+    </div>
+  </footer>
+
+  <!-- Botón WhatsApp flotante -->
+  <a href="https://wa.me/10000000000" class="whatsapp-fab" aria-label="Escríbenos por WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.5.3.1.3.1.7-.1 1.1Z"/></svg>
+  </a>
+
+  <!-- Botón volver arriba -->
+  <button class="to-top" id="toTop" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none"><path d="m6 14 6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
