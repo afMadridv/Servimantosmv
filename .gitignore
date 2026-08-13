@@ -5,3 +5,8 @@ desktop.ini
 
 # Editor / preview
 .claude/launch.json
+.obsidian/
+
+# Secretos: nunca al repo
+.env
+.env.*

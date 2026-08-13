@@ -1,0 +1,15 @@
+# Cabeceras de seguridad (Netlify / Cloudflare Pages).
+# Si el sitio se publica en otro hosting, este archivo se ignora
+# sin romper nada.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+
+# El portal maneja la sesión del usuario: no se deja embeber
+# en ninguna página, ni siquiera propia.
+/portal/*
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=()

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0c2440" />
+  <title>Portal de Reportes · Servimantos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230c2440'/><path d='M18 62 L38 44 L54 57 L82 34' fill='none' stroke='%23ff6a1a' stroke-width='11' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+</head>
+<body>
+
+  <!-- ===== LOGIN ===== -->
+  <div id="view-login" class="login-screen hidden">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="../assets/img/logo.svg" alt="Servimantos" class="login-logo" />
+        <p class="login-sub">Portal de Reportes de Obra</p>
+      </div>
+      <form id="login-form" autocomplete="on">
+        <label class="field">
+          <span>Correo</span>
+          <input type="email" id="login-email" required autocomplete="username" placeholder="tucorreo@ejemplo.com" />
+        </label>
+        <label class="field">
+          <span>Contraseña</span>
+          <input type="password" id="login-password" required autocomplete="current-password" placeholder="••••••••" />
+        </label>
+        <label class="check-row">
+          <input type="checkbox" id="login-keep" checked />
+          <span>Mantener sesión iniciada</span>
+        </label>
+        <p id="login-error" class="form-error hidden"></p>
+        <button type="submit" class="btn btn-primary btn-block" id="login-btn">Ingresar</button>
+      </form>
+      <a class="login-back" href="../index3.0.html">← Volver al sitio</a>
+    </div>
+  </div>
+
+  <!-- ===== APP ===== -->
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../assets/img/logo.svg" alt="Servimantos" />
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="generar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+          Reporte de Obra
+        </button>
+        <button class="nav-item" data-view="historial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><path d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9z"/></svg>
+          Historial / Editar
+        </button>
+        <button class="nav-item" data-view="pagina">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Administrar página
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="back-site" href="../index3.0.html">← Volver al sitio</a>
+        <div class="user-chip">
+          <div class="user-avatar" id="user-avatar">?</div>
+          <div class="user-info">
+            <strong id="user-name">—</strong>
+            <small id="user-email">—</small>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-block" id="logout-btn">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- ===== GENERAR ===== -->
+      <section id="view-generar" class="view">
+        <header class="view-header">
+          <h2 id="form-title">Nuevo reporte de obra</h2>
+          <p id="form-sub">Completa los datos, agrega las hojas de fotos y genera el PDF.</p>
+        </header>
+
+        <div class="form-layout">
+          <div class="form-panel">
+            <form id="dynamic-form"></form>
+            <div class="form-actions">
+              <button class="btn btn-ghost" id="preview-btn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Vista previa
+              </button>
+              <button class="btn btn-primary" id="generate-btn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span id="generate-btn-label">Generar PDF</span>
+              </button>
+              <span id="save-status" class="save-status"></span>
+            </div>
+          </div>
+
+          <div class="preview-panel hidden" id="preview-panel">
+            <div class="preview-head">
+              <span>Vista previa</span>
+              <button class="btn btn-ghost btn-sm" id="refresh-preview">Actualizar</button>
+            </div>
+            <iframe id="pdf-preview" title="Vista previa del PDF"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HISTORIAL ===== -->
+      <section id="view-historial" class="view hidden">
+        <header class="view-header">
+          <h2>Historial de Reportes</h2>
+          <p>Edita cualquier reporte sin volver a llenarlo todo.</p>
+        </header>
+        <div class="toolbar">
+          <input type="search" id="search-historial" class="search-input" placeholder="Buscar por proyecto, número o visita…" />
+          <button class="btn btn-primary" id="nuevo-btn">+ Nuevo reporte</button>
+        </div>
+        <div id="historial-list" class="historial-list"></div>
+      </section>
+
+      <!-- ===== ADMINISTRAR PÁGINA ===== -->
+      <section id="view-pagina" class="view hidden">
+        <header class="view-header">
+          <h2>Administrar página</h2>
+          <p>Los proyectos que se ven en el sitio web. Cada uno es una caja con su nombre y sus fotos.</p>
+        </header>
+        <div class="toolbar">
+          <input type="search" id="search-proyectos" class="search-input" placeholder="Buscar proyecto…" />
+          <button class="btn btn-primary" id="nuevo-proyecto-btn">+ Nuevo proyecto</button>
+          <a class="btn btn-ghost" href="../index3.0.html#proyectos" target="_blank" rel="noopener">Ver en la web</a>
+        </div>
+        <div id="proyectos-list" class="proy-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== MODAL PROYECTO ===== -->
+  <div id="proyecto-modal" class="modal-overlay hidden">
+    <div class="modal modal-lg">
+      <h3 id="proyecto-modal-title">Nuevo proyecto</h3>
+      <label class="field">
+        <span>Nombre del proyecto *</span>
+        <input type="text" id="proy-nombre" maxlength="60" placeholder="Ej: Azotea residencial" />
+      </label>
+      <label class="field">
+        <span>Descripción corta</span>
+        <input type="text" id="proy-descripcion" maxlength="90" placeholder="Ej: Manto mineral granular · 120 m²" />
+        <small class="field-hint">Sale debajo del nombre, en la caja de la web.</small>
+      </label>
+      <div class="field">
+        <span>Fotos del proyecto</span>
+        <small class="field-hint">La primera foto es la portada de la caja. Las demás se ven al abrirla.</small>
+        <div class="proy-fotos" id="proy-fotos"></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="proy-add-foto">+ Agregar foto</button>
+      </div>
+      <label class="check-row">
+        <input type="checkbox" id="proy-publicado" checked />
+        <span>Visible en la página web</span>
+      </label>
+      <p id="proyecto-error" class="form-error hidden"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+        <button type="button" class="btn btn-primary" id="proy-save">Guardar proyecto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL SALIR SIN GUARDAR ===== -->
+  <div id="exit-modal" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <h3>Tienes cambios sin guardar</h3>
+      <p class="confirm-text">Si sales ahora, el progreso de este reporte se perderá.</p>
+      <div class="modal-actions modal-actions-stack">
+        <button type="button" class="btn btn-primary" id="exit-save">Guardar cambios y salir</button>
+        <button type="button" class="btn btn-danger" id="exit-discard">Salir sin guardar</button>
+        <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL CONFIRMAR ===== -->
+  <div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <h3 id="confirm-title">¿Confirmar?</h3>
+      <p id="confirm-text" class="confirm-text"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirm-ok">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/formats.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

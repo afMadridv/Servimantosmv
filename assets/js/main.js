@@ -132,6 +132,15 @@
     setTimeout(() => (formMsg.textContent = ""), 6000);
   });
 
+  /* ---- Tema claro/oscuro ---- */
+  const themeBtn = $("#themeBtn");
+  themeBtn?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const next = (root.getAttribute("data-theme") || "light") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("sm-theme", next); } catch (e) {}
+  });
+
   /* ---- Marca de scroll inicial ---- */
   onScroll();
 })();
