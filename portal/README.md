@@ -53,7 +53,7 @@ las demás se ven cuando el visitante la abre.
 - Los cambios se ven en el sitio al recargarlo: no hay que volver a publicar.
 
 Mientras no haya ningún proyecto cargado, la web muestra las cinco cajas de
-ejemplo que vienen escritas en `index3.0.html`. En cuanto se guarda el primero,
+ejemplo que vienen escritas en `index.html`. En cuanto se guarda el primero,
 esas desaparecen y solo se ven los de verdad.
 
 ## Cómo se genera el PDF
@@ -86,7 +86,7 @@ Las credenciales ya están puestas en [`js/config.js`](js/config.js)
 ### 2. Publicar
 
 `portal/` es estático: se sube junto con el resto del sitio, sin build. El
-enlace **Portal** ya está en el menú y en el pie de los tres `index`.
+enlace **Acceso equipo** ya está en el pie de `index.html`.
 
 ### 3. Textos de la empresa
 
@@ -124,7 +124,7 @@ portal/
 └── supabase/schema.sql   # tablas + RLS + consecutivo + storage
 ```
 
-El sitio público (`index3.0.html`) también carga `js/config.js`: de ahí saca la
+El sitio público (`index.html`) también carga `js/config.js`: de ahí saca la
 URL y la anon key para leer los proyectos. Por eso en ese archivo no va nada
 que no pueda ver un visitante.
 

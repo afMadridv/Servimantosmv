@@ -8,7 +8,7 @@
    REPORTE es el texto fijo del formato: si algún día cambia el
    encabezado o quien firma, se cambia AQUÍ y no en el código.
 
-   OJO: el sitio público (index3.0.html) también carga este
+   OJO: el sitio público (index.html) también carga este
    archivo para leer los proyectos, así que aquí no va nada que
    no pueda ver un visitante.
    ============================================================ */
