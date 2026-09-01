@@ -354,6 +354,22 @@ img, svg { display: block; max-width: 100%; }
   width: 26px; height: 30px; font-size: 17px; line-height: 1; font-weight: 700;
 }
 
+/* ---------- Crédito del pie ---------- */
+.portal-footer {
+  margin-top: 34px; padding-top: 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12.5px; color: var(--slate-2);
+}
+.portal-footer a {
+  color: var(--slate); font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--t), border-color var(--t);
+}
+.portal-footer a:hover { color: var(--orange-deep); border-bottom-color: var(--orange); }
+/* en el login la tarjeta es blanca y angosta: sin línea y más pegado */
+.login-card .portal-footer { margin-top: 14px; padding-top: 0; border-top: none; }
+
 /* ---------- Botones de icono ---------- */
 .icon-btn {
   background: none; border: 1.5px solid var(--line); border-radius: 9px;
