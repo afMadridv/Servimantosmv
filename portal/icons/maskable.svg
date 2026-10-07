@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Variante «maskable»: fondo a sangre (Android recorta en círculo,
+       gota o cuadrado) y el dibujo encogido dentro de la zona segura
+       (círculo central del 80 %). -->
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14406c"/>
+      <stop offset="1" stop-color="#081a2f"/>
+    </linearGradient>
+    <linearGradient id="techo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff6a1a"/>
+      <stop offset="1" stop-color="#ff9a4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#fondo)"/>
+  <g transform="translate(256 262) scale(.78) translate(-256 -246)">
+    <g fill="#38bdf8">
+      <path d="M178 112s-28 34-28 55a28 28 0 0 0 56 0c0-21-28-55-28-55Z"/>
+      <path d="M256 84s-32 39-32 63a32 32 0 0 0 64 0c0-24-32-63-32-63Z"/>
+      <path d="M334 112s-28 34-28 55a28 28 0 0 0 56 0c0-21-28-55-28-55Z"/>
+    </g>
+    <path d="M154 330v78h204v-78" fill="none" stroke="#ffffff" stroke-opacity=".92" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M96 342 256 228l160 114" fill="none" stroke="url(#techo)" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

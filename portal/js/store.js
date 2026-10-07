@@ -2,10 +2,10 @@
    Capa de datos: Supabase (producción) o localStorage (demo).
    La app solo habla con `Store`, nunca con Supabase directo.
 
-   El portal es de UN SOLO usuario: no hay roles ni gestión de
-   trabajadores. El nombre que se muestra sale de los metadatos
-   del usuario de Supabase (`full_name`), así que no hace falta
-   una tabla de perfiles.
+   Roles: cada usuario tiene una fila en `perfiles` con rol
+   «admin» o «trabajador». Si esa tabla todavía no existe (schema
+   viejo, cuando el portal era de un solo usuario), ese usuario
+   se trata como admin para no quitarle nada de lo que ya tenía.
    ============================================================ */
 (function () {
   const DEMO_KEYS = {
@@ -37,7 +37,31 @@
       id: user.id,
       email: user.email,
       name: meta.full_name || meta.name || (user.email || "").split("@")[0],
+      nombreDeMeta: !!(meta.full_name || meta.name),
+      rol: "trabajador",
     };
+  }
+
+  /* La tabla no existe todavía: el schema.sql nuevo no se ha corrido. */
+  const tablaFalta = (error) =>
+    !!error && (error.code === "42P01" || error.code === "PGRST205" ||
+      /does not exist|schema cache/i.test(error.message || ""));
+
+  /* Completa el perfil con el rol (y el nombre) de la tabla `perfiles`. */
+  async function cargarRol(perfil) {
+    const { data, error } = await sb.from("perfiles").select("rol, nombre").eq("id", perfil.id).maybeSingle();
+    if (error) {
+      // schema viejo = portal de un solo usuario: ese usuario es el dueño
+      perfil.rol = tablaFalta(error) ? "admin" : "trabajador";
+      if (!tablaFalta(error)) console.warn("No se pudo leer el perfil:", error.message);
+      return perfil;
+    }
+    if (data) {
+      perfil.rol = data.rol === "admin" ? "admin" : "trabajador";
+      // el full_name de Authentication manda; perfiles.nombre es el respaldo
+      if (!perfil.nombreDeMeta && data.nombre) perfil.name = data.nombre;
+    }
+    return perfil;
   }
 
   /* Comprime una imagen a JPEG máx 1600px: las fotos de obra salen
@@ -162,13 +186,13 @@
         const sess = lsGet(DEMO_KEYS.session, null);
         const user = lsGet(DEMO_KEYS.user, null);
         if (sess && user && sess.id === user.id) {
-          currentProfile = { id: user.id, name: user.name, email: user.email };
+          currentProfile = { id: user.id, name: user.name, email: user.email, rol: "admin" };
         }
         return currentProfile;
       }
       sb = makeClient(localStorage.getItem("sm_keep") !== "0");
       const { data: { session } } = await sb.auth.getSession();
-      if (session) currentProfile = perfilDeSesion(session.user);
+      if (session) currentProfile = await cargarRol(perfilDeSesion(session.user));
       return currentProfile;
     },
 
@@ -181,7 +205,7 @@
         const user = lsGet(DEMO_KEYS.user, null);
         if (!user || user.email.toLowerCase() !== correo.toLowerCase() || user.password !== password)
           throw new Error("Usuario o contraseña incorrectos.");
-        currentProfile = { id: user.id, name: user.name, email: user.email };
+        currentProfile = { id: user.id, name: user.name, email: user.email, rol: "admin" };
         lsSet(DEMO_KEYS.session, { id: user.id });
         return currentProfile;
       }
@@ -189,7 +213,7 @@
       sb = makeClient(keep);
       const { data, error } = await sb.auth.signInWithPassword({ email: correo, password });
       if (error) throw new Error(mensajeLogin(error));
-      currentProfile = perfilDeSesion(data.user);
+      currentProfile = await cargarRol(perfilDeSesion(data.user));
       return currentProfile;
     },
 
@@ -197,6 +221,98 @@
       if (this.isDemo) localStorage.removeItem(DEMO_KEYS.session);
       else await sb.auth.signOut();
       currentProfile = null;
+    },
+
+    esAdmin() { return currentProfile?.rol === "admin"; },
+
+    /* ---------- auditoría y avisos ---------- */
+    /* Deja constancia de lo que pasa en el portal. El servidor pone
+       quién lo hizo (actor_id/actor_nombre) con un trigger: el
+       navegador no puede firmar un evento a nombre de otro. Si hay
+       Web Push configurado, además pide a la Edge Function que avise
+       a quien corresponda. Nunca lanza: un aviso que falla no debe
+       tumbar el guardado de un reporte. */
+    async registrarEvento(tipo, detalle = {}) {
+      if (this.isDemo || !sb || !currentProfile) return null;
+      try {
+        const { data, error } = await sb.from("eventos").insert({ tipo, detalle }).select("id").single();
+        if (error) {
+          if (!tablaFalta(error)) console.warn(`Evento «${tipo}» no registrado:`, error.message);
+          return null;
+        }
+        if (APP_CONFIG.VAPID_PUBLIC_KEY) {
+          sb.functions.invoke(APP_CONFIG.PUSH_FUNCTION || "notificar", { body: { evento_id: data.id } })
+            .then(({ error: e }) => e && console.warn("Push no enviado:", e.message))
+            .catch(() => {});
+        }
+        return data.id;
+      } catch (e) {
+        console.warn(`Evento «${tipo}» no registrado:`, e);
+        return null;
+      }
+    },
+
+    /* Escucha en vivo los eventos nuevos que este usuario puede ver
+       (RLS: el admin ve todos; los demás, solo los suyos). Devuelve
+       la función para dejar de escuchar. */
+    suscribirEventos(cb) {
+      if (this.isDemo || !sb) return () => {};
+      const canal = sb.channel("eventos-portal")
+        .on("postgres_changes", { event: "INSERT", schema: "public", table: "eventos" }, (p) => cb(p.new))
+        .subscribe();
+      return () => sb.removeChannel(canal);
+    },
+
+    /* ¿Es la primera vez que esta cuenta entra desde este navegador?
+       `primero` = la cuenta no tenía ningún dispositivo: no es raro,
+       es el estreno, y no merece alerta. */
+    async registrarDispositivo({ device_id, texto }) {
+      const nada = { nuevo: false, primero: false };
+      if (this.isDemo || !sb || !currentProfile) return nada;
+      try {
+        const { data: filas, error } = await sb.from("dispositivos").select("device_id");
+        if (error) {
+          if (!tablaFalta(error)) console.warn("Dispositivos:", error.message);
+          return nada;
+        }
+        const ahora = new Date().toISOString();
+        if (filas.some((f) => f.device_id === device_id)) {
+          await sb.from("dispositivos").update({ ultima_vez: ahora, descripcion: texto }).eq("device_id", device_id);
+          return nada;
+        }
+        const { error: e2 } = await sb.from("dispositivos").insert({ device_id, descripcion: texto });
+        if (e2) { console.warn("Dispositivos:", e2.message); return nada; }
+        return { nuevo: true, primero: filas.length === 0 };
+      } catch (e) {
+        console.warn("Dispositivos:", e);
+        return nada;
+      }
+    },
+
+    /* ---------- suscripción Web Push de este dispositivo ---------- */
+    async guardarSuscripcionPush(sub, device_id, prefs) {
+      if (this.isDemo || !sb || !currentProfile) return;
+      const j = sub.toJSON();
+      const { error } = await sb.from("push_suscripciones").upsert({
+        endpoint: j.endpoint,
+        p256dh: j.keys.p256dh,
+        auth: j.keys.auth,
+        device_id,
+        prefs,
+        user_agent: navigator.userAgent.slice(0, 300),
+      }, { onConflict: "endpoint" });
+      if (error && !tablaFalta(error)) console.warn("Suscripción push:", error.message);
+    },
+
+    async actualizarPrefsPush(endpoint, prefs) {
+      if (this.isDemo || !sb || !endpoint) return;
+      const { error } = await sb.from("push_suscripciones").update({ prefs }).eq("endpoint", endpoint);
+      if (error && !tablaFalta(error)) console.warn("Preferencias push:", error.message);
+    },
+
+    async borrarSuscripcionPush(endpoint) {
+      if (this.isDemo || !sb || !endpoint) return;
+      await sb.from("push_suscripciones").delete().eq("endpoint", endpoint);
     },
 
     /* ---------- reportes ---------- */

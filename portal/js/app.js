@@ -1,6 +1,8 @@
 /* ============================================================
-   Lógica de la interfaz: login, formulario, hojas de fotos,
-   vista previa e historial.
+   Lógica de la interfaz: login, formatos, formulario, hojas de
+   fotos, vista previa, historial y administración del sitio.
+
+   Rutas (hash): #formatos (inicio) · #reporte · #historial · #pagina
    ============================================================ */
 (function () {
   const $ = (sel) => document.querySelector(sel);
@@ -65,7 +67,7 @@
      ARRANQUE Y SESIÓN
      ============================================================ */
   async function boot() {
-    if (Store.isDemo) $("#demo-hint").classList.remove("hidden");
+    $("#demo-hint")?.classList.toggle("hidden", !Store.isDemo);
     let profile = null;
     try { profile = await Store.init(); }
     catch (e) { console.error(e); }
@@ -76,10 +78,14 @@
   function enterApp(profile) {
     $("#view-login").classList.add("hidden");
     $("#app").classList.remove("hidden");
+    $("#app").classList.toggle("es-admin", profile.rol === "admin");
     $("#user-name").textContent = profile.name;
     $("#user-email").textContent = profile.email;
     $("#user-avatar").textContent = (profile.name || "?").trim().charAt(0).toUpperCase();
-    openForm(null);
+    renderFormatos();
+    irARuta(location.hash);
+    // los avisos nunca deben frenar la entrada al portal
+    NotificationService.init(profile, { guard: guardExit }).catch((e) => console.warn("Notificaciones:", e));
   }
 
   $("#login-form").addEventListener("submit", async (e) => {
@@ -108,7 +114,10 @@
   $("#logout-btn").addEventListener("click", async () => {
     const ok = await showConfirm("Cerrar sesión", "¿Seguro que deseas salir del portal?", "Cerrar sesión");
     if (!ok) return;
+    // primero los avisos: borrar la suscripción push necesita la sesión viva
+    await NotificationService.alCerrarSesion();
     await Store.logout();
+    history.replaceState(null, "", location.pathname);
     location.reload();
   });
 
@@ -142,23 +151,75 @@
   /* ============================================================
      NAVEGACIÓN
      ============================================================ */
+  const VISTAS = ["formatos", "generar", "historial", "pagina"];
+  /* vista → hash de la URL (el formulario se comparte como #reporte) */
+  const HASH_DE = { formatos: "formatos", generar: "reporte", historial: "historial", pagina: "pagina" };
+
   function switchView(view) {
-    $$(".nav-item").forEach((b) => b.classList.toggle("active", b.dataset.view === view));
-    ["generar", "historial", "pagina"].forEach((v) => $(`#view-${v}`).classList.toggle("hidden", v !== view));
+    // «Administrar página» es solo de administradores (el servidor también lo exige)
+    if (view === "pagina" && !Store.esAdmin()) view = "formatos";
+    const nav = view === "generar" ? "formatos" : view;   // el formulario cuelga de «Formatos»
+    $$(".nav-item").forEach((b) => b.classList.toggle("active", b.dataset.view === nav));
+    VISTAS.forEach((v) => $(`#view-${v}`).classList.toggle("hidden", v !== view));
+    // replaceState: cambia la URL sin disparar hashchange ni llenar el historial
+    if (location.hash.slice(1) !== HASH_DE[view]) history.replaceState(null, "", `#${HASH_DE[view]}`);
     if (view === "historial") renderHistorial();
     if (view === "pagina") renderProyectos();
   }
 
-  $$(".nav-item").forEach((b) => b.addEventListener("click", () => {
-    // "Nuevo reporte" desde el historial arranca una hoja en blanco
-    if (b.dataset.view === "generar" && editingRecord) {
-      guardExit(() => openForm(null));
-      return;
+  /* #reporte abre un formulario en blanco; lo demás, la vista que diga */
+  function irARuta(hash) {
+    const r = String(hash || "").replace(/^#/, "").split("?")[0];
+    if (r === "reporte" || r === "reporte-obra") {
+      if (!$("#view-generar").classList.contains("hidden")) return;   // ya está ahí
+      openForm(null);
+    } else if (VISTAS.includes(r) && r !== "generar") {
+      switchView(r);
+    } else {
+      switchView("formatos");
     }
+  }
+
+  /* un aviso, un acceso directo de la app o el usuario cambiaron el hash */
+  window.addEventListener("hashchange", () => {
+    if ($("#app").classList.contains("hidden")) return;
+    guardExit(() => irARuta(location.hash));
+  });
+
+  $$(".nav-item").forEach((b) => b.addEventListener("click", () => {
     guardExit(() => switchView(b.dataset.view));
   }));
 
   $("#nuevo-btn").addEventListener("click", () => guardExit(() => openForm(null)));
+  $("#form-back").addEventListener("click", () => guardExit(() => switchView("formatos")));
+
+  /* ============================================================
+     FORMATOS: una caja por formato. Para sumar uno nuevo, se
+     agrega a window.FORMATOS (formats.js) y aquí su apertura.
+     ============================================================ */
+  const ABRIR_FORMATO = {
+    reporte_obra: () => openForm(null),
+  };
+
+  function renderFormatos() {
+    const grid = $("#formatos-grid");
+    grid.innerHTML = (window.FORMATOS || []).map((f, i) => `
+      <button type="button" class="fmt-card" data-formato="${escapeHtml(f.key)}">
+        <span class="fmt-num">${String(i + 1).padStart(2, "0")}</span>
+        <span class="fmt-ic">${window.ICONS[f.icon] || window.ICONS.report}</span>
+        <span class="fmt-body">
+          <strong>${escapeHtml(f.nombre)}</strong>
+          <small>${escapeHtml(f.descripcion)}</small>
+        </span>
+        <span class="fmt-tags">${(f.etiquetas || []).map((t) => `<span>${escapeHtml(t)}</span>`).join("")}</span>
+        <span class="fmt-go">Abrir formato ${window.ICONS.arrowRight}</span>
+      </button>`).join("");
+    grid.querySelectorAll(".fmt-card").forEach((card) => card.addEventListener("click", () => {
+      const abrir = ABRIR_FORMATO[card.dataset.formato];
+      if (abrir) guardExit(abrir);
+      else toast("Este formato todavía no está disponible.", "error");
+    }));
+  }
 
   /* el <form> vive toda la sesión: el aviso de "cambios sin guardar"
      se engancha una sola vez y no en cada openForm() */
@@ -251,6 +312,12 @@
     $("#pdf-preview").removeAttribute("src");
     switchView("generar");
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // auditoría: los administradores ven quién abre qué formato
+    NotificationService.formatoAbierto({
+      formato_key: FORMATO.key, formato: FORMATO.name,
+      numero: record ? record.numero : "", proyecto: data.proyecto || "",
+    });
   }
 
   function normalizarHojas(hojas) {
@@ -462,6 +529,7 @@
       const conFotos = await Store.uploadPending(data);
 
       let record;
+      const esNuevo = !editingRecord;
       if (editingRecord) {
         record = await Store.updateReporte(editingRecord.id, conFotos);
       } else {
@@ -477,7 +545,17 @@
       if (download) await PDFGen.download(await Store.hydrateImages(record));
       formDirty = false;
       $("#save-status").textContent = "✓ Guardado en el historial";
-      toast(download ? `Reporte ${record.numero} generado y guardado.` : `Reporte ${record.numero} guardado.`);
+
+      const aviso = { formato_key: FORMATO.key, formato: FORMATO.name, numero: record.numero, proyecto: conFotos.proyecto || "" };
+      NotificationService.formatoCompletado({ ...aviso, nuevo: esNuevo });
+      if (download) {
+        // si el usuario apagó ese aviso, al menos el toast confirma
+        NotificationService.formatoListo(aviso).then((avisado) => {
+          if (!avisado) toast(`Reporte ${record.numero} generado y guardado.`);
+        });
+      } else {
+        toast(`Reporte ${record.numero} guardado.`);
+      }
       return true;
     } catch (e) {
       console.error(e);
@@ -547,6 +625,7 @@
         try {
           const rec = await Store.getReporte(id);
           await PDFGen.download(await Store.hydrateImages(rec));
+          NotificationService.formatoListo({ formato: FORMATO.name, numero: rec.numero, proyecto: rec.data?.proyecto || "" });
         } catch (ex) {
           toast(ex.message || "No se pudo generar el PDF.", "error");
         } finally { e.target.disabled = false; }

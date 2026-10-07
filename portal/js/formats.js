@@ -25,7 +25,32 @@ window.ICONS = {
   image: svg('<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'),
   up: svg('<line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>'),
   down: svg('<line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>'),
+  bell: svg('<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>'),
+  bellOff: svg('<path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/>'),
+  shield: svg('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'),
+  users: svg('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+  check: svg('<polyline points="20 6 9 17 4 12"/>'),
+  close: svg('<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'),
+  arrowRight: svg('<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'),
+  arrowLeft: svg('<line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>'),
+  install: svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 7v7"/><polyline points="9 11 12 14 15 11"/><line x1="10" y1="18" x2="14" y2="18"/>'),
+  wifiOff: svg('<line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>'),
 };
+
+/* ============================================================
+   Catálogo de formatos: cada uno es una caja en «Formatos».
+   Para sumar un formato nuevo se agrega una entrada aquí y su
+   función de apertura en ABRIR_FORMATO (app.js).
+   ============================================================ */
+window.FORMATOS = [
+  {
+    key: "reporte_obra",
+    nombre: "Reporte de Obra",
+    descripcion: "Visita a obra con hojas de 4 fotos, conclusiones, recomendaciones y firma.",
+    etiquetas: ["PDF A4", "4 fotos por hoja", "Consecutivo INF-VT"],
+    icon: "report",
+  },
+];
 
 /* Cuántas fotos lleva cada hoja. El formato es fijo: 4. */
 window.FOTOS_POR_HOJA = 4;

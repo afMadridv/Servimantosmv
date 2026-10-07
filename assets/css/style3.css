@@ -264,6 +264,9 @@ footer.site{border-top:1px solid var(--ln);padding:3.2rem 0 1.6rem;color:var(--m
 @keyframes fmark{to{background-position:260% 0}}
 @media (prefers-reduced-motion:reduce){.f-mark{animation:none}}
 .fbottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem;border-top:1px solid var(--ln);padding-top:1.3rem;font-size:.84rem}
+.f-credit{text-align:center;font-size:.8rem;margin-top:1.1rem;color:var(--mut)}
+.f-credit a{display:inline-block;padding:.75rem .2rem;font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+.f-credit a:hover{color:var(--or-2);text-decoration-color:var(--or)}
 
 /* ---------- FABs ---------- */
 .wa{position:fixed;right:20px;bottom:20px;z-index:150;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -8px rgba(37,211,102,.6);transition:transform .25s var(--eo)}

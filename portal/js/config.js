@@ -19,6 +19,13 @@ window.APP_CONFIG = {
   /* fotos de los proyectos que se ven en la web (bucket PÚBLICO) */
   PROYECTOS_BUCKET: "proyectos-web",
 
+  /* Web Push: avisos con el portal CERRADO. Es la llave PÚBLICA
+     VAPID (la privada va solo en los secretos de Supabase).
+     Vacía = sin push; los avisos llegan igual mientras el portal
+     esté abierto. Ver README → «Notificaciones». */
+  VAPID_PUBLIC_KEY: "",
+  PUSH_FUNCTION: "notificar",
+
   COMPANY: {
     name: "SERVIMANTOS MV",
     phone: "+57 300 437 2848",
