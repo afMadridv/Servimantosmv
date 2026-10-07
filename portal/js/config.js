@@ -23,7 +23,7 @@ window.APP_CONFIG = {
      VAPID (la privada va solo en los secretos de Supabase).
      Vacía = sin push; los avisos llegan igual mientras el portal
      esté abierto. Ver README → «Notificaciones». */
-  VAPID_PUBLIC_KEY: "BDQXaVYmNTyqBF9RSIMKjdjP4Qettjp6DXSveLCzLHVN_e77gygkdb6RGy-PXxCT9m43HybfMbAqP9K23xmLEgA",
+  VAPID_PUBLIC_KEY: "BG10PELVY8rxBI-93fYHbUyGMyoqmdMNHMBTpBx0C-b-isUFfmhiCdB3M3z8pBlK5lnvql80-sFBE2XJM2Ns0Z0",
   PUSH_FUNCTION: "notificar",
 
   COMPANY: {
