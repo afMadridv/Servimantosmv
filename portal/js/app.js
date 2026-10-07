@@ -273,9 +273,16 @@
         case "text": case "number": {
           const label = document.createElement("label");
           label.className = "field";
-          label.innerHTML = `<span>${escapeHtml(f.label)}${f.required ? " *" : ""}</span>
+          /* sin título: el espacio del título se conserva (en blanco) para
+             que la casilla quede alineada con la de al lado */
+          const titulo = f.label
+            ? `<span>${escapeHtml(f.label)}${f.required ? " *" : ""}</span>`
+            : `<span aria-hidden="true">&nbsp;</span>`;
+          label.innerHTML = `${titulo}
             <input type="${f.type}" id="f-${f.key}" ${f.required ? "required" : ""}
               ${f.min != null ? `min="${f.min}"` : ""}
+              ${f.maxlength ? `maxlength="${f.maxlength}"` : ""}
+              ${f.ariaLabel ? `aria-label="${escapeHtml(f.ariaLabel)}"` : ""}
               placeholder="${escapeHtml(f.placeholder || "")}" value="${escapeHtml(val ?? "")}" />${hint}`;
           container(f.half).appendChild(label);
           break;
@@ -603,7 +610,7 @@
         <div class="hist-icon">${window.ICONS.report}</div>
         <div class="hist-info">
           <strong>${escapeHtml(r.proyecto || "Sin proyecto")}</strong>
-          <small>Visita ${escapeHtml(r.visita || "—")} · ${escapeHtml(fechaLarga(r.fecha))} · editado ${editado}</small>
+          <small>${r.visita ? `${escapeHtml(r.visita)} · ` : ""}${escapeHtml(fechaLarga(r.fecha))} · editado ${editado}</small>
         </div>
         <span class="hist-num">${escapeHtml(r.numero)}</span>
         <div class="hist-actions">

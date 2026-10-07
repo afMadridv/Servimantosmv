@@ -46,9 +46,12 @@ Todas llevan el mismo encabezado:
 | | | |
 |---|---|---|
 | logo | **REPORTE DE OBRA**<br>para impermeabilizacion de cubiertas | `INF-VT-001`<br>`9/06/25`<br>`1/3` |
-| **Proyecto** | Puerta Dorada Marisima E1 | **Visita No.** 1 |
+| **Proyecto** | Puerta Dorada Marisima E1 | `OS-25-014` *(casilla libre)* |
 | **Solicitante** | Ing. Residente Eddisson Rueda | **Contrato** Os 25 00002 |
 
+- **Casilla libre** (arriba a la derecha): sin título y opcional. Ahí va un
+  código, con letras y números (hasta 30 caracteres). En el formulario es la
+  casilla en blanco junto a «Nombre del ingeniero».
 - **Hojas de fotos**: título opcional (ej. «Placa 2») y **4 fotos** en dos
   columnas, cada una con su descripción debajo.
 - **Hoja final**: `CONCLUSIONES Y RECOMENDACIONES` y el bloque «Realizado por».

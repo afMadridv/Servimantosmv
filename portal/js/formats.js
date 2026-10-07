@@ -64,8 +64,10 @@ window.FORMATO = {
       placeholder: "Ej: Puerta Dorada Marisima E1" },
     { key: "ingeniero", label: "Nombre del ingeniero", type: "text", required: true, half: true,
       placeholder: "Ej: Ing. Residente Eddisson Rueda" },
-    { key: "visita",    label: "Visita N°", type: "number", required: true, half: true,
-      placeholder: "Ej: 1", min: 1 },
+    /* Casilla libre, sin título: ahí se suele escribir un código
+       (letras y números). La clave sigue siendo «visita» para que los
+       reportes viejos conserven lo que tenían. */
+    { key: "visita",    label: "", ariaLabel: "Código", type: "text", half: true, maxlength: 30 },
     { key: "contrato",  label: "Contrato", type: "text", required: true, half: true,
       placeholder: "Ej: Os 25 00002" },
     { key: "fecha",     label: "Fecha", type: "date-auto", half: true,

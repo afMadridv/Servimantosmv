@@ -11,7 +11,7 @@
      │           │  para impermeab...   │  9/06/25   │
      │           │                      │    1/3     │
      ├───────────┼──────────────────────┼────────────┤  765.48
-     │ Proyecto  │  ...                 │ Visita No. │  739.90
+     │ Proyecto  │  ...                 │ (código)   │  739.90
      ├───────────┼──────────────────────┼────────────┤
      │Solicitante│  ...                 │ Contrato   │  717.22
      ├───────────┴──────────────────────┴────────────┤
@@ -253,8 +253,9 @@ function drawHeader(ctx, info, logo) {
      alineadas entre sí (en el formato a mano bailaban unos puntos). */
   const VAL_X3 = X2 + 70;
   const filas = [
+    /* casilla libre (un código): sin etiqueta, el valor usa toda la casilla */
     { y: 753.34, etiqueta: "Proyecto",    valor: info.proyecto,
-      etiqueta3: "Visita No.", valor3: info.visita },
+      etiqueta3: "", valor3: info.visita },
     { y: 727.78, etiqueta: "Solicitante", valor: info.ingeniero,
       etiqueta3: "Contrato",   valor3: info.contrato },
   ];
@@ -262,9 +263,10 @@ function drawHeader(ctx, info, logo) {
     ctx.txt(f.etiqueta, ML + 5.2, f.y, 11, { font: bold, maxW: X1 - ML - 10 });
     const s = fitSize(bold, wa(f.valor), 11, X2 - X1 - 14);
     ctx.txt(f.valor, X1 + 5.2, f.y, s, { font: bold, maxW: X2 - X1 - 10 });
-    ctx.txt(f.etiqueta3, X2 + 5.2, f.y, 11, { font: bold, maxW: VAL_X3 - X2 - 8 });
-    const s3 = fitSize(bold, wa(f.valor3), 11, MR - VAL_X3 - 8);
-    ctx.txt(f.valor3, VAL_X3, f.y, s3, { font: bold, maxW: MR - VAL_X3 - 5 });
+    const x3 = f.etiqueta3 ? VAL_X3 : X2 + 5.2;
+    if (f.etiqueta3) ctx.txt(f.etiqueta3, X2 + 5.2, f.y, 11, { font: bold, maxW: VAL_X3 - X2 - 8 });
+    const s3 = fitSize(bold, wa(f.valor3), 11, MR - x3 - 8);
+    ctx.txt(f.valor3, x3, f.y, s3, { font: bold, maxW: MR - x3 - 5 });
   }
 
   /* filete naranja de marca bajo la fila del título */
