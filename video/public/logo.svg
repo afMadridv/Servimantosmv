@@ -1,0 +1,21 @@
+<svg width="380" height="220" viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Servimantos">
+  <!-- gotas de agua -->
+  <g fill="#4196F0">
+    <path d="M92 42s-8 10-8 16a8 8 0 0 0 16 0c0-6-8-16-8-16Z"/>
+    <path d="M140 32s-9 11-9 18a9 9 0 0 0 18 0c0-7-9-18-9-18Z"/>
+    <path d="M190 38s-8 10-8 16a8 8 0 0 0 16 0c0-6-8-16-8-16Z"/>
+    <path d="M238 32s-9 11-9 18a9 9 0 0 0 18 0c0-7-9-18-9-18Z"/>
+    <path d="M284 44s-7 9-7 15a7 7 0 0 0 14 0c0-6-7-15-7-15Z"/>
+  </g>
+  <!-- chimeneas -->
+  <rect x="58" y="112" width="11" height="26" fill="#141414"/>
+  <rect x="320" y="106" width="11" height="30" fill="#141414"/>
+  <!-- tejado naranja (cuerpo) -->
+  <path d="M34 168 L84 126 L134 160 L196 112 L256 160 L306 122 L346 166" fill="none" stroke="#D58336" stroke-width="15" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- tejado negro (cresta) -->
+  <path d="M34 156 L84 114 L134 148 L196 100 L256 148 L306 110 L346 154" fill="none" stroke="#141414" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- texto -->
+  <text x="190" y="206" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="44" letter-spacing="0.5">
+    <tspan fill="#4196F0">SERVI</tspan><tspan fill="#D58336">MANTOS</tspan>
+  </text>
+</svg>
