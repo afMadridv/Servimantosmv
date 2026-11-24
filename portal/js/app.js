@@ -46,13 +46,6 @@
     });
   }
 
-  /* Fecha de HOY en hora local. Con toISOString() a secas, un reporte
-     hecho por la tarde en Colombia (UTC-5) salía ya con la fecha del
-     día siguiente, porque esa función trabaja en UTC. */
-  const hoy = () => {
-    const d = new Date();
-    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-  };
   const fechaLarga = (iso) => {
     if (!iso) return "";
     const [y, m, d] = iso.split("-");
@@ -270,7 +263,7 @@
       const hint = f.hint ? `<small class="field-hint">${escapeHtml(f.hint)}</small>` : "";
 
       switch (f.type) {
-        case "text": case "number": {
+        case "text": case "number": case "date": {
           const label = document.createElement("label");
           label.className = "field";
           /* sin título: el espacio del título se conserva (en blanco) para
@@ -284,18 +277,6 @@
               ${f.maxlength ? `maxlength="${f.maxlength}"` : ""}
               ${f.ariaLabel ? `aria-label="${escapeHtml(f.ariaLabel)}"` : ""}
               placeholder="${escapeHtml(f.placeholder || "")}" value="${escapeHtml(val ?? "")}" />${hint}`;
-          container(f.half).appendChild(label);
-          break;
-        }
-        case "date-auto": {
-          /* la fecha no se escribe: se pone sola al crear el reporte
-             y se conserva tal cual cuando se edita después */
-          const iso = val || hoy();
-          const label = document.createElement("label");
-          label.className = "field";
-          label.innerHTML = `<span>${escapeHtml(f.label)}</span>
-            <input type="text" id="f-${f.key}" class="input-auto" readonly tabindex="-1"
-              value="${escapeHtml(fechaLarga(iso))}" data-iso="${escapeHtml(iso)}" />${hint}`;
           container(f.half).appendChild(label);
           break;
         }
@@ -465,7 +446,7 @@
       }
       const el = $(`#f-${f.key}`);
       if (!el) continue;
-      data[f.key] = f.type === "date-auto" ? el.dataset.iso : el.value.trim();
+      data[f.key] = el.value.trim();
     }
     return data;
   }

@@ -13,7 +13,7 @@
 
    OJO: al cambiar este archivo o la lista APP_SHELL, sube VERSION.
    ============================================================ */
-const VERSION = "2026-10-07.1";
+const VERSION = "2026-11-24.1";
 const SHELL = `sm-shell-${VERSION}`;
 const RUNTIME = "sm-runtime";          // CDNs y fuentes: viven entre versiones
 

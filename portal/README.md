@@ -64,8 +64,8 @@ Todas llevan el mismo encabezado:
   - Limpieza y retiro de arena
   ```
 
-La **fecha** no se escribe: se pone sola el día que se crea el reporte y no
-cambia si se edita más adelante. El **número de hoja** (`1/3`) también es
+La **fecha** la elige quien llena el reporte (obligatoria, cualquier día) y se
+puede cambiar al editarlo. El **número de hoja** (`1/3`) es
 automático y cuenta las hojas de fotos más las de conclusiones.
 
 ## Administrar página

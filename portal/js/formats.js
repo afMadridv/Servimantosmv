@@ -2,10 +2,10 @@
    El único formato del portal: REPORTE DE OBRA.
 
    El formulario se dibuja solo a partir de `FORMATO.fields`.
-   Tipos: text | number | date-auto | textarea | hojas
+   Tipos: text | number | date | textarea | hojas
 
-   - date-auto: la fecha no se escribe, se pone sola el día que
-     se crea el reporte (y no cambia al editarlo después).
+   - date: la fecha la elige quien llena el reporte (queda en
+     AAAA-MM-DD) y se puede cambiar al editarlo.
    - hojas: las páginas de fotos. Cada hoja lleva un título
      opcional y EXACTAMENTE 4 fotos, cada una con su descripción.
    ============================================================ */
@@ -70,8 +70,7 @@ window.FORMATO = {
     { key: "visita",    label: "", ariaLabel: "Código", type: "text", half: true, maxlength: 30 },
     { key: "contrato",  label: "Contrato", type: "text", required: true, half: true,
       placeholder: "Ej: Os 25 00002" },
-    { key: "fecha",     label: "Fecha", type: "date-auto", half: true,
-      hint: "Se pone sola el día que se crea el reporte." },
+    { key: "fecha",     label: "Fecha", type: "date", required: true, half: true },
 
     { section: "Hojas de fotos" },
     { key: "hojas", label: "Hojas", type: "hojas" },
